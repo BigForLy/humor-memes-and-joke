@@ -46,7 +46,7 @@ class RequestMethod {
                 catch(e: Exception){
                     println(e.message.toString())
                 }
-//                listener?.invoke(notNullJson)
+
                 listener?.invoke(result)
             }
         })

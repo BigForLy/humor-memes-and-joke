@@ -11,7 +11,6 @@ import com.example.humormemeandjoke.ui.one.OneFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import me.kondratyev.androidApp.ui.two.TwoFragment
 
@@ -49,23 +48,16 @@ class StartHumorActivity : AppCompatActivity() {
     @ExperimentalSerializationApi
     private fun replaceNewFragment(fragmentClass: FragmentClassAdapter) {
         val actualFragment = oneFragment
-        fragmentClass.initialFrame(actualFragment)
+        replaceFragment(actualFragment)
         GlobalScope.launch(Dispatchers.Main) {
-            randomJoke(fragmentClass as RequestClassAdapter)
-        }
-
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, actualFragment)
-        transaction.commit()
-    }
-    @ExperimentalSerializationApi
-    private fun randomJoke(requestClass : RequestClassAdapter){
-        GlobalScope.launch {
-            withContext(Dispatchers.Default) {
-                requestMethod.request(requestClass) {
+            requestMethod.request(fragmentClass as RequestClassAdapter) {
+                runOnUiThread {
                     println(it)
+                    fragmentClass.joke = it
+                    fragmentClass.initialFrame(actualFragment)
                 }
             }
         }
     }
+
 }
