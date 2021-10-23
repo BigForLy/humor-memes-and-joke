@@ -4,38 +4,52 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.humormemeandjoke.adapter.FragmentClassAdapter
-import com.example.humormemeandjoke.adapter.RequestClassAdapter
-import com.example.humormemeandjoke.fragmentClass.TronaldDumpFragmentClass
+import com.example.humormemeandjoke.fragmentClass.RzhuNeMogu
+import com.example.humormemeandjoke.network.RetrofitClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.humormemeandjoke.ui.one.OneFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
-import me.kondratyev.androidApp.ui.two.TwoFragment
 
 class StartHumorActivity : AppCompatActivity() {
 
-    private val oneFragment = OneFragment()
-    private val twoFragment = TwoFragment()
-
-    private val requestMethod = RequestMethod()
+    private val requestMethodNew = RequestMethodNew
+    private val fragmentMap : MutableMap<Int, Fragment> = mutableMapOf()
 
     @ExperimentalSerializationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_humor)
 
-        replaceFragment(oneFragment)
+        fragmentMap[R.id.ic_dashboard] = OneFragment()
+        replaceFragment(initialFragment(R.id.ic_dashboard))
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.ic_dashboard -> replaceFragment(oneFragment)
-                R.id.ic_settings -> replaceFragment(twoFragment)
-                R.id.ic_info -> replaceNewFragment(TronaldDumpFragmentClass())
+                R.id.ic_dashboard ->  replaceFragment(initialFragment(R.id.ic_dashboard))
+                R.id.ic_settings -> replaceNewFragment(RzhuNeMogu(), initialFragment(R.id.ic_settings))
+                R.id.ic_info ->  replaceNewFragment(RzhuNeMogu(), initialFragment(R.id.ic_info))
             }
             true
+        }
+        bottomNavigation.setOnItemReselectedListener { item ->
+            when (item.itemId) {
+                R.id.ic_dashboard -> replaceFragment(initialFragment(R.id.ic_dashboard))
+                R.id.ic_settings -> replaceFragment(initialFragment(R.id.ic_settings))
+                R.id.ic_info -> replaceFragment(initialFragment(R.id.ic_info))
+            }
+        }
+    }
+
+    private fun initialFragment(id: Int) : Fragment {
+        return if (fragmentMap.contains(id)) {
+            fragmentMap[id]!!
+        } else {
+            fragmentMap[id] = OneFragment.newInstance("", RetrofitClient.retrofit)
+            fragmentMap[id]!!
         }
     }
 
@@ -46,11 +60,11 @@ class StartHumorActivity : AppCompatActivity() {
     }
 
     @ExperimentalSerializationApi
-    private fun replaceNewFragment(fragmentClass: FragmentClassAdapter) {
-        val actualFragment = oneFragment
+    private fun replaceNewFragment(fragmentClass: FragmentClassAdapter, actualFragment: Fragment) {
         replaceFragment(actualFragment)
+
         GlobalScope.launch(Dispatchers.Main) {
-            requestMethod.request(fragmentClass as RequestClassAdapter) {
+            requestMethodNew.request(RetrofitClient.retrofit) {
                 runOnUiThread {
                     println(it)
                     fragmentClass.joke = it

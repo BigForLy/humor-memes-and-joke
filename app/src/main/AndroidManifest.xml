@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.humormemeandjoke">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,7 +8,9 @@
     <application
         android:allowBackup="false"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:targetApi="m">
         <activity android:name=".StartHumorActivity" />
         <activity
             android:name=".MainActivity"

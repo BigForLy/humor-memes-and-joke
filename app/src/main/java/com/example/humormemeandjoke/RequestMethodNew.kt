@@ -1,7 +1,5 @@
 package com.example.humormemeandjoke
 
-import com.example.humormemeandjoke.adapter.RequestClassAdapter
-import com.example.humormemeandjoke.dataClasses.TronaldDumpJsonClass
 import com.example.humormemeandjoke.dataClasses.UniversalJsonClass
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
@@ -9,21 +7,11 @@ import kotlinx.serialization.json.Json
 import okhttp3.*
 import java.io.IOException
 
-@Suppress("NAME_SHADOWING")
-class RequestMethod {
-    private val client : OkHttpClient = OkHttpClient()
+object RequestMethodNew {
+    private val client : OkHttpClient  by lazy { OkHttpClient() }
 
     @ExperimentalSerializationApi
-    fun request(requestClass: RequestClassAdapter, listener: ((xes: String)->Unit)? = null){
-        val host = requestClass.host
-        val key = requestClass.key
-        val request = Request.Builder()
-            .url("https://matchilling-tronald-dump-v1.p.rapidapi.com/random/quote")
-            .get()
-            .addHeader("accept", "application/hal+json")
-            .addHeader("x-rapidapi-host", host)
-            .addHeader("x-rapidapi-key", key)
-            .build()
+    fun request(request: Request, listener: ((xes: String)->Unit)? = null){
 
         client.newCall(request).enqueue(object : Callback {
             // При возникновении ошибки подключении
@@ -41,8 +29,8 @@ class RequestMethod {
                     notNullJson = json.replace("\r\n", "")
                 }
                 try {
-                    val commonBlock = Json.decodeFromString<TronaldDumpJsonClass>(notNullJson)
-                    result = commonBlock.toParse()
+                    val commonBlock = Json.decodeFromString<UniversalJsonClass>(notNullJson)
+                    result = commonBlock.toRzhu()
                 }
                 catch(e: Exception){
                     println(e.message.toString())
