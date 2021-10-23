@@ -25,9 +25,6 @@ data class UniversalJsonClass(
     @SerialName("content")
     val content: String? = null
 ) {
-    fun toParse() : String{
-        return value!!
-    }
 
     fun toRzhu() : String{
         return content!!

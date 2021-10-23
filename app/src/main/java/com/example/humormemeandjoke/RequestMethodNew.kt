@@ -26,7 +26,9 @@ object RequestMethodNew {
                 var result = ""
 
                 if (json != null) {
-                    notNullJson = json.replace("\r\n", "")
+                    notNullJson = json.replace("\r\n-", "|||")
+                        .replace("\r\n", "")
+                        .replace("|||", "\r\n-")
                 }
                 try {
                     val commonBlock = Json.decodeFromString<UniversalJsonClass>(notNullJson)

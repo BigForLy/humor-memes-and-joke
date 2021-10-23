@@ -1,17 +1,17 @@
 package com.example.humormemeandjoke.ui.one
 
-import android.annotation.SuppressLint
-import android.app.DownloadManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.humormemeandjoke.R
 import com.example.humormemeandjoke.RequestMethodNew
-import com.example.humormemeandjoke.network.RetrofitClient
 import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import okhttp3.Request
@@ -49,12 +49,15 @@ class OneFragment : Fragment() {
 
         val button = view.findViewById<Button>(R.id.button_joke)
         button.setOnClickListener{
+            val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+            progressBar.visibility = VISIBLE
             uiScope.launch(Dispatchers.IO){
                 //asyncOperation
                 withContext(Dispatchers.Main){
                     //ui operation
                     RequestMethodNew.request(request!!) {
                         activity?.runOnUiThread {
+                            progressBar.visibility = INVISIBLE
                             println(it)
 
                             val textView = view.findViewById<TextView>(R.id.text_view_fragment_one)
