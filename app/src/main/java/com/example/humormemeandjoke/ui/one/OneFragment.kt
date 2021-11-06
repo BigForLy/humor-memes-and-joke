@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.humormemeandjoke.R
-import com.example.humormemeandjoke.RequestMethodNew
+import com.example.humormemeandjoke.network.RequestMethod
 import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import okhttp3.Request
@@ -55,10 +55,9 @@ class OneFragment : Fragment() {
                 //asyncOperation
                 withContext(Dispatchers.Main){
                     //ui operation
-                    RequestMethodNew.request(request!!) {
+                    RequestMethod.request(request!!) {
                         activity?.runOnUiThread {
                             progressBar.visibility = INVISIBLE
-                            println(it)
 
                             val textView = view.findViewById<TextView>(R.id.text_view_fragment_one)
                             textView.text = it
@@ -68,6 +67,7 @@ class OneFragment : Fragment() {
 
             }
         }
+        button.callOnClick()
 
         return view
     }

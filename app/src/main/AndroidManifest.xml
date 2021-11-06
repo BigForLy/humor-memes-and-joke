@@ -8,8 +8,8 @@
     <application
         android:allowBackup="false"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".StartHumorActivity" />
         <activity

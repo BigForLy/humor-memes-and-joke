@@ -1,10 +1,7 @@
 package com.example.humormemeandjoke.adapter
 
-import com.example.humormemeandjoke.RequestMethodNew
+import okhttp3.Request
 
 interface RequestClassAdapter {
-    var host: String
-    var key: String
-    var dataClass: Any
-    val accept: String
+    var retrofit: Request
 }
