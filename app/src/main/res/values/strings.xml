@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Humor meme and joke</string>
-    <string name="hello_blank_fragment_one">Hello blank fragment one</string>
-    <string name="getJokeButton">Joke</string>
+    <string name="getJokeButton">Еще…</string>
+    <string name="joke">Joke</string>
+    <string name="stories">Stories</string>
+    <string name="status">Status</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.humormemeandjoke.adapter.RequestClassAdapter
 import com.example.humormemeandjoke.fragmentClass.Joke
+import com.example.humormemeandjoke.fragmentClass.Status
 import com.example.humormemeandjoke.fragmentClass.Stories
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.humormemeandjoke.ui.one.OneFragment
@@ -17,14 +18,14 @@ class StartHumorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_humor)
 
-        replaceFragment(Joke(), R.id.ic_dashboard)
+        replaceFragment(Joke(), R.id.joke)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.ic_dashboard ->  replaceFragment(Joke(), R.id.ic_dashboard)
-                R.id.ic_settings -> replaceFragment(Stories(), R.id.ic_settings)
-                R.id.ic_info ->  replaceFragment(Stories(), R.id.ic_info)
+                R.id.joke ->  replaceFragment(Joke(), R.id.joke)
+                R.id.stories -> replaceFragment(Stories(), R.id.stories)
+                R.id.status ->  replaceFragment(Status(), R.id.status)
             }
             true
         }

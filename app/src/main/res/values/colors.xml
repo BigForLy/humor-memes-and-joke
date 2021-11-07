@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="pink">#E91E63</color>
+
+<!--    https://www.schemecolor.com/sample?getcolor=17223B-->
+    <color name="yankees_blue">#17223b</color>
+    <color name="rainbow_indigo">#263859</color>
+    <color name="slate_gray">#6b778d</color>
+    <color name="pastel_red">#FF6768</color>
+    <color name="back">#fef4a9</color>
+    <color name="button_color">#4bc2c5</color>
 </resources>

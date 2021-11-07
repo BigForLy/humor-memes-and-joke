@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/ic_dashboard"
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:title="Dashboard" />
+        android:id="@+id/joke"
+        android:icon="@drawable/ic_winking_face"
+        android:title="@string/joke" />
     <item
-        android:id="@+id/ic_settings"
-        android:icon="@android:drawable/btn_minus"
-        android:title="Settings" />
+        android:id="@+id/stories"
+        android:icon="@drawable/ic_auto_stories"
+        android:title="@string/stories" />
     <item
-        android:id="@+id/ic_info"
-        android:icon="@android:drawable/presence_invisible"
-        android:title="Info" />
+        android:id="@+id/status"
+        android:icon="@drawable/ic_status_unknown"
+        android:title="@string/status" />
 </menu>

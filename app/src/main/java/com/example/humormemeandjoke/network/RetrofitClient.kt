@@ -17,6 +17,14 @@ object RetrofitClient {
             .build()
     }
 
+    private val retrofitStatusRequest by lazy {
+        Request.Builder()
+            .url("http://rzhunemogu.ru/RandJSON.aspx?CType=8")
+            .get()
+            .build()
+    }
+
     val retrofitJoke: Request by lazy { this.retrofitJokeRequest }
     val retrofitStories: Request by lazy { this.retrofitStoriesRequest }
+    val retrofitStatus: Request by lazy { this.retrofitStatusRequest }
 }
