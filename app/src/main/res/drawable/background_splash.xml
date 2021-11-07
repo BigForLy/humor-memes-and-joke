@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@color/yankees_blue"/>
+
+    <item android:top="60dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/splash_text"/>
+    </item>
+
+    <item android:bottom="150dp"
+        android:drawable="@drawable/ic__103_confetti_outline"
+        android:gravity="center" />
+
+</layer-list>

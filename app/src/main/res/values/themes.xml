@@ -10,4 +10,10 @@
             tools:targetApi="l">?attr/colorPrimaryVariant
         </item>
     </style>
+
+    <style name="HumorMemeAndJoke.NoActionBar.Launcher">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <!-- для Android 5+ вы можете поменять цвет colorPrimaryDark, чтобы соответствовать цвету windowBackground -->
+         <item name="colorPrimaryDark">@color/yankees_blue</item>
+    </style>
 </resources>
