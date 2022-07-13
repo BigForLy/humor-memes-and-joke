@@ -22,20 +22,11 @@ object RequestMethod {
             // При приходе запроса, производим обработку сообщения
             override fun onResponse(call: Call, response: Response) {
                 val json = response.body?.string()
-                var notNullJson = ""
                 var result = ""
 
-                if (json != null) {
-                    notNullJson = "{\"content\":\"" +
-                            json
-                        .substring(12, json.length-2)
-                        .replace("\"", "\'\'") +
-                            "\"}"
-                    println(notNullJson)
-                }
                 try {
-                    val commonBlock = Json.decodeFromString<JokeJsonClass>(notNullJson)
-                    result = commonBlock.getString()
+                    val commonBlock = Json.decodeFromString<JokeJsonClass>(json ?: "{\"content\":\"\"}")
+                    result = commonBlock.content.toString()
                 }
                 catch(e: Exception){
                     println(e.message.toString())

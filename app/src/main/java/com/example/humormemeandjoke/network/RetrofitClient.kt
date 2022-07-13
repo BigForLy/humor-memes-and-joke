@@ -5,21 +5,21 @@ import okhttp3.Request
 object RetrofitClient {
     private val retrofitJokeRequest by lazy {
         Request.Builder()
-            .url("http://rzhunemogu.ru/RandJSON.aspx?CType=1")
+            .url("https://humor-memes-and-joke.herokuapp.com/joke")
             .get()
             .build()
     }
 
     private val retrofitStoriesRequest by lazy {
         Request.Builder()
-            .url("http://rzhunemogu.ru/RandJSON.aspx?CType=2")
+            .url("https://humor-memes-and-joke.herokuapp.com/stories")
             .get()
             .build()
     }
 
     private val retrofitStatusRequest by lazy {
         Request.Builder()
-            .url("http://rzhunemogu.ru/RandJSON.aspx?CType=8")
+            .url("https://humor-memes-and-joke.herokuapp.com/status")
             .get()
             .build()
     }
