@@ -1,30 +1,21 @@
 package com.example.humormemeandjoke.network
 
-import okhttp3.Request
 
 object RetrofitClient {
-    private val retrofitJokeRequest by lazy {
-        Request.Builder()
-            .url("https://humor-memes-and-joke.herokuapp.com/joke")
-            .get()
-            .build()
+
+    var url_mapping: String = ""
+
+    fun get_joke(): String {
+        return url_mapping + "joke"
     }
 
-    private val retrofitStoriesRequest by lazy {
-        Request.Builder()
-            .url("https://humor-memes-and-joke.herokuapp.com/stories")
-            .get()
-            .build()
+
+    fun get_stories(): String {
+        return url_mapping + "stories"
     }
 
-    private val retrofitStatusRequest by lazy {
-        Request.Builder()
-            .url("https://humor-memes-and-joke.herokuapp.com/status")
-            .get()
-            .build()
+    fun get_status(): String {
+        return url_mapping + "status"
     }
 
-    val retrofitJoke: Request by lazy { this.retrofitJokeRequest }
-    val retrofitStories: Request by lazy { this.retrofitStoriesRequest }
-    val retrofitStatus: Request by lazy { this.retrofitStatusRequest }
 }

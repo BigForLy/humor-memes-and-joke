@@ -12,6 +12,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.humormemeandjoke.R
 import com.example.humormemeandjoke.network.RequestMethod
+import com.example.humormemeandjoke.network.RetrofitClient
 import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import okhttp3.Request
@@ -26,7 +27,7 @@ private const val ARG_PARAM1 = "param1"
 class OneFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
-    private var request: Request? = null
+    private var url: String = ""
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
@@ -49,20 +50,33 @@ class OneFragment : Fragment() {
         button.setOnClickListener{
             val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
             progressBar.visibility = VISIBLE
-            uiScope.launch(Dispatchers.IO){
-                //asyncOperation
-                withContext(Dispatchers.Main){
-                    //ui operation
-                    RequestMethod.request(request!!) {
-                        activity?.runOnUiThread {
-                            progressBar.visibility = INVISIBLE
 
-                            val textView = view.findViewById<TextView>(R.id.text_view_fragment_one)
-                            textView.text = it
+            uiScope.launch(Dispatchers.IO){
+                try {
+                    //asyncOperation
+                    withContext(Dispatchers.Main) {
+                        val request = Request.Builder()
+                            .url(RetrofitClient.url_mapping + "stories")
+                            .get()
+                            .build()
+                        //ui operation
+                        RequestMethod.request(request) {
+                            activity?.runOnUiThread {
+                                progressBar.visibility = INVISIBLE
+
+                                val textView = view.findViewById<TextView>(R.id.text_view_fragment_one)
+                                textView.text = it
+                            }
                         }
                     }
-                }
+                } catch (e: Exception) {
+                    progressBar.visibility = INVISIBLE
 
+                    withContext(Dispatchers.Main) {
+                        val textView = view.findViewById<TextView>(R.id.text_view_fragment_one)
+                        textView.text = "Что-то пошло не так! Попробуйте снова!"
+                    }
+                }
             }
         }
         button.callOnClick()
@@ -85,12 +99,12 @@ class OneFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: Request) =
+        fun newInstance(param1: String, param2: String) =
             OneFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                 }
-                request = param2
+                url = param2
             }
     }
 }

@@ -5,8 +5,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class JokeJsonClass(
-    @SerialName("content")
-    val content: String?
+data class MappingJsonClass(
+    @SerialName("mapping")
+    val mapping: String
 ){
 }
