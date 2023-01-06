@@ -1,7 +1,6 @@
 package com.example.humormemeandjoke.ui.one
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -10,12 +9,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.example.humormemeandjoke.R
 import com.example.humormemeandjoke.network.RequestMethod
 import com.example.humormemeandjoke.network.RetrofitClient
+import com.example.humormemeandjoke.network.loggedException
 import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import okhttp3.Request
+
 
 private const val ARG_PARAM1 = "param1"
 
@@ -75,6 +77,8 @@ class OneFragment : Fragment() {
                     withContext(Dispatchers.Main) {
                         val textView = view.findViewById<TextView>(R.id.text_view_fragment_one)
                         textView.text = "Что-то пошло не так! Попробуйте снова!"
+
+                        loggedException(e)
                     }
                 }
             }
